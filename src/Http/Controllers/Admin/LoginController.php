@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Fligno\Auth\Traits\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Fligno\Auth\Models\OauthToken;
 
 class LoginController extends Controller
 {
@@ -28,13 +29,13 @@ class LoginController extends Controller
 
         $tokenResult = $user->createToken('Personal Access Token');
         $token = $tokenResult->token;
-
+      
         if ($request->remember_me) {
             $token->expires_at = Carbon::now()->addWeeks(1);
         }
 
         $token->save();
-
+       
         return response()->json([
             'access_token' => $tokenResult->accessToken,
             'token_type' => 'Bearer',

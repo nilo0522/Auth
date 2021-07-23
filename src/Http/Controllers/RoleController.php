@@ -6,12 +6,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Fligno\Auth\Traits\Paginators;
-use Fligno\Auth\Resources\PaginationCollection;
-
+use Fligno\Auth\Resource\PaginationCollection;
+use Fligno\Auth\Traits\EventToken;
+use App\Models\Setting;
+use Laravel\Passport\Passport;
+use Illuminate\Support\Carbon;
 class RoleController extends Controller
 {
-    use Paginators;
+   use Paginators;
+    use EventToken;
 
+    
     /**
      * Display a listing of the resource.
      *
@@ -28,8 +33,13 @@ class RoleController extends Controller
         $columns = ['name'];
 
         $data = $this->paginate($roles, $columns);
-
+         // $this->setTokenExpire();  
         return new PaginationCollection($data);
+        //return auth()->guard('api')->user();
+        //$dt = Carbon::now();
+        //$dt = Carbon::createFromFormat('Y-m-d H:i:s', now());
+        //return now();
+        //return $dt;
     }
 
     /**
@@ -40,6 +50,7 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
+        //$this->setTokenExpire();  
         request()->validate([
             'name' => 'required|unique:roles',
         ]);
@@ -57,6 +68,7 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
+       // $this->setTokenExpire();  
         return response($role, 200);
     }
 
@@ -69,6 +81,7 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
+        //$this->setTokenExpire();  
         request()->validate([
             'name' => 'required',
         ]);
@@ -94,6 +107,7 @@ class RoleController extends Controller
      */
     public function destroyAll()
     {
+        //$this->setTokenExpire();  
         Role::whereIn('id', request('ids'))->delete();
 
         return response([], 204);

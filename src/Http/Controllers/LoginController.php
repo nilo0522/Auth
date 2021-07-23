@@ -14,11 +14,11 @@ class LoginController extends Controller
     use AuthenticatesUsers;
     use ThrottlesLogins;
 
-    protected $maxAttempts = 3;
+    protected $maxAttempts = 2;
 	/**
  	* Number of minutes to lock the login.
  	*/
-	protected $decayMinutes = 1;
+	protected $decayMinutes = 1; 	
 
 	public function login(Request $request)
     {
@@ -36,4 +36,12 @@ class LoginController extends Controller
 
      	return $this->sendLoginResponse($request);
     }
+	public function logout()
+{ 
+	auth()->user()->token()->revoke();
+    
+	   return redirect('admin/login');
+    
+}
+	
 }

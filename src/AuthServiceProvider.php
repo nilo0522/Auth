@@ -22,10 +22,10 @@ class AuthServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'Auth');
 
         // Load migrations
-        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+       // $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
 
         // Load factories
-        $this->registerEloquentFactoriesFrom(__DIR__ . '/database/factories');
+       // $this->registerEloquentFactoriesFrom(__DIR__ . '/database/factories');
 
         $this->publishes([
             __DIR__ . '/resources/js' => resource_path('/js'),
@@ -58,8 +58,8 @@ class AuthServiceProvider extends ServiceProvider
      * @return void
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    protected function registerEloquentFactoriesFrom($path)
+    protected static function newFactory(): Factory
     {
-        $this->app->make(EloquentFactory::class)->load($path);
+        return FactoryClass::new();
     }
 }

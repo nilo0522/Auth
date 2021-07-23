@@ -15,4 +15,8 @@ return [
 
 
     'reset_password_url' => env('RESET_PASSWORD_URL', null),
+    'providers' => [
+      
+        Spatie\Permission\PermissionServiceProvider::class
+    ]
 ];

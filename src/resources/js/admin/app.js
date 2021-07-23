@@ -1,8 +1,9 @@
 import "../admin_bootstrap";
-import React, { Suspense, lazy, useState } from "react";
+import React, { Suspense, lazy, useState,useEffect } from "react";
 import ReactDOM from "react-dom";
 import { Sidebar, Content, Loader } from "./components";
 import { BrowserRouter as Router } from "react-router-dom";
+import Socket_Conn from "../socket_con";
 import Cookie from "js-cookie";
 
 const Login = lazy(() => import("~/pages/login"));
@@ -23,7 +24,8 @@ const Home = () => {
     await axios.post("/api/logout");
     window.location = "/admin/login";
   };
-
+ 
+  
   return (
     <Router basename="/admin">
       <div className="h-screen flex">
