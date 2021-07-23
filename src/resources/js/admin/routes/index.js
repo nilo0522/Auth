@@ -1,5 +1,5 @@
-import React, { lazy } from "react";
-
+import React, { lazy,useEffect } from "react";
+import Socket_Conn from "../../socket_con";
 const Roles = lazy(() => import("~/pages/roles"));
 const CreateRole = lazy(() => import("~/pages/roles/create"));
 const EditRole = lazy(() => import("~/pages/roles/edit"));
@@ -13,6 +13,9 @@ const RolesPermissions = lazy(() => import("~/pages/roles-permission"));
 const Resrource = lazy(() => import("~/pages/resource"));
 const CreateResrource = lazy(() => import("~/pages/resource/create"));
 const EditResrource = lazy(() => import("~/pages/resource/edit"));
+
+const SessionTimeout = lazy(() => import("~/pages/session"));
+
 
 const routes = [
   {
@@ -68,6 +71,12 @@ const routes = [
     path: "/resource/:slug/edit/:id",
     exact: true,
     component: () => <EditResrource />
+  },
+  {
+    path:"/session-setting",
+    exact:true,
+    component: () => <SessionTimeout/>
+
   }
 ];
 export default routes;

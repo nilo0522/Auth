@@ -27,7 +27,7 @@ if (token) {
     },
     function(error) {
       if (401 === error.response.status) {
-        logout();
+        window.location.href="/admin/login"
       } else {
         return Promise.reject(error);
       }

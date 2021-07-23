@@ -6,9 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-
+use Fligno\Auth\Traits\EventToken;
 class RolePermissionController extends Controller
 {
+    use EventToken;
     /**
      * Display a listing of the resource.
      *
@@ -16,6 +17,7 @@ class RolePermissionController extends Controller
      */
     public function index()
     {
+        //$this->setTokenExpire();  
         $roles = Role::with('permissions:id');
         return response()->json($roles->get()->toArray());
     }
@@ -30,6 +32,7 @@ class RolePermissionController extends Controller
      */
     public function update(Role $role, Permission $permission)
     {
+       // $this->setTokenExpire();  
         $method = request('isChecked') ?  'givePermissionTo' : 'revokePermissionTo';
 
         $role->{$method}($permission);

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import DataTable from "~/Layout/DataTable";
+import Socket_Conn from "../../../socket_con";
 
 const columns = {
   name: {
@@ -11,6 +12,7 @@ const title = {
   singular: "Permission",
   plural: "Permissions"
 };
+
 
 const Permissions = () => (
   <DataTable

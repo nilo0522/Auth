@@ -1,6 +1,6 @@
 <?php
 
-namespace Fligno\Auth\Resource;
+namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Carbon\Carbon;

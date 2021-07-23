@@ -22,7 +22,7 @@ if (token) {
     return response;
   }, function (error) {
     if (401 === error.response.status) {
-      logout()
+      window.location.href="/login"
     } else {
       return Promise.reject(error);
     }
@@ -51,3 +51,16 @@ const logout = async () => {
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+import Echo from "laravel-echo"
+
+window.Pusher = require('pusher-js');
+
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: 'pusherKey',
+    wsHost: window.location.hostname,
+    wsPort: 6001,
+    forceTLS: false,
+    disableStats: true,
+});
+

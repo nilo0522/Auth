@@ -1,10 +1,10 @@
 <?php
-
+use Fligno\Auth\Events\WebSocketEvent;
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('users/me', function () {
         return request()->user();
     });
-
+    
     Route::post('logout', 'LoginController@logout')->name('logout');
 });
 
@@ -17,6 +17,7 @@ Route::group(['middleware' => 'guest:api'], function () {
 });
 
 Route::group(['middleware' => ['auth:api', 'role:Admin']], function () {
+    
     Route::apiResource('role', 'RoleController');
     Route::delete('role', 'RoleController@destroyAll')->name('role.destroyAll');
 
@@ -25,7 +26,7 @@ Route::group(['middleware' => ['auth:api', 'role:Admin']], function () {
 
     Route::get('roles-permissions', 'RolePermissionController@index')->name('role-permission.index');
     Route::post('roles-permissions/{role}/{permission}', 'RolePermissionController@update')->name('role-permission.update');
-
+    Route::apiResource('resource', 'ResourceController');
     Route::get('resource/{model}', 'ResourceController@get')->name('resource.get');
     Route::get('resource/data/{model}', 'ResourceController@getData')->name('resource.getData');
     Route::post('resource/{model}', 'ResourceController@store')->name('resource.store');
@@ -36,7 +37,21 @@ Route::group(['middleware' => ['auth:api', 'role:Admin']], function () {
 
     Route::post('user-activation/{user}', 'UserActivationController@update')->name('user.activation');
     Route::apiResource('user', 'UserController');
+
+    Route::get('newsletters', 'NewsletterController@index');
+    Route::delete('newsletters', 'NewsletterController@destroy');
+    Route::post('newsletters/mail/send', 'ComingSoonEmailController@send');
+
+    Route::get('app-settings/coming-soon', 'ComingSoonController@index');
+    Route::patch('app-settings/coming-soon', 'ComingSoonController@update');
+    Route::get('app-settings/email', 'ComingSoonEmailController@index');
+    Route::patch('app-settings/email', 'ComingSoonEmailController@update');
+
+    Route::apiResource('setting','SettingController');
+    Route::get('setting-session','SettingController@index');
+    broadcast(new WebSocketEvent('toxen-update'));
 });
 
+Route::post('newsletters', 'NewsletterController@store');
 Route::get('email/resend', 'VerificationController@resend')->name('verification.resend')->middleware(['auth:api', 'throttle:60,1']);
 Route::get('email/verify/{id}/{hash}', 'VerificationController@verify')->middleware(['throttle:60,1']);
