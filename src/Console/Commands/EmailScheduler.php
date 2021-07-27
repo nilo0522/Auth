@@ -2,18 +2,18 @@
 
 namespace App\Console\Commands;
 
+use Fligno\Auth\Models\Newsletter;
 use Illuminate\Console\Command;
-use Illuminate\Support\Carbon;
-use Fligno\Auth\Models\OauthToken; 
-use DB;
-class UserExpireToken extends Command
+use Fligno\Auth\Mail\WebsiteLaunched;
+use Illuminate\Support\Facades\Mail;
+class EmailScheduler extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'token:update';
+    protected $signature = 'email:schedule';
 
     /**
      * The console command description.
@@ -39,10 +39,11 @@ class UserExpireToken extends Command
      */
     public function handle()
     {
-     $dt = Carbon::now();
-       $oldToken = OauthToken::where('expires_at','<',$dt)->delete(); 
-       info('Token deleted');
-      
-      
+        $emails = NewsLetter::all();
+        foreach($emails as $email)
+        {
+            Mail::to($email)->send(new WebsiteLaunched());
+        }
+        info('email successfully send');
     }
 }
