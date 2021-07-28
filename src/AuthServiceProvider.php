@@ -22,7 +22,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'Auth');
 
         // Load migrations
-       // $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
 
         // Load factories
        // $this->registerEloquentFactoriesFrom(__DIR__ . '/database/factories');
@@ -51,15 +51,4 @@ class AuthServiceProvider extends ServiceProvider
         $this->app->register(RouteServiceProvider::class);
     }
 
-    /**
-     * Register factories.
-     *
-     * @param string $path
-     * @return void
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
-     */
-    protected static function newFactory(): Factory
-    {
-        return FactoryClass::new();
-    }
 }
