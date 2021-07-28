@@ -33,8 +33,6 @@ class ComingSoonEmailController extends Controller
             $comingsoon = AppSetting::first()->get();
             return response()->json($comingsoon);
         }
-       
-
 
     }
 
@@ -47,16 +45,7 @@ class ComingSoonEmailController extends Controller
     {
         request()->validate([
             'subject' => 'required',
-           // 'content' => 'required',
         ]);
-
-       /* AppSetting::where('coming_soon_email_subject', )->update([
-            'value' => request()->coming_soon_email_subject
-        ]);
-
-        AppSetting::where('key', 'coming_soon_email_content')->update([
-            'value' => request()->coming_soon_email_content
-        ]);*/
         $app_setting = new AppSetting;
         $app_setting ->subject = $request -> subject;
         $app_setting ->content = $request -> content;
@@ -70,14 +59,6 @@ class ComingSoonEmailController extends Controller
      */
     public function send()
     {
-       /* $emails = Newsletter::all()->pluck('email')->toArray();
-
-        foreach ($emails as $email) {
-            Mail::to($email)->send(new WebsiteLaunched());
-        }
-
-        return response()->json([], 204);*/
-
         $emails = NewsLetter::all();
         foreach($emails as $email)
         {
