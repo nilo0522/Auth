@@ -1,18 +1,36 @@
 {
-  "name": "wanmigs/laravel-auth",
-  "description": "Laravel Auth Preset Package",
+  "name": "fligno/user-management",
+  "description": "Laravel package for user authentication and a bunch of other things.",
   "type": "package",
   "require": {
-    "php": "^7.2",
-    "laravel/passport": "^8.0",
-    "spatie/laravel-permission": "^3.6.0"
+    "php": "^7.3|^8.0",
+    "beyondcode/laravel-websockets": "^1.12",
+    "fideloper/proxy": "^4.4",
+    "fruitcake/laravel-cors": "^2.0",
+    "guzzlehttp/guzzle": "^7.0.1",
+    "laravel/framework": "^8.40",
+    "laravel/passport": "^10.1",
+    "laravel/tinker": "^2.5",
+    "laravel/ui": "^3.3",
+    "pusher/pusher-php-server": "^5.0",
+    "spatie/laravel-permission": "^3.6.0",
+    "spatie/laravel-short-schedule": "^1.4",
+    "spatie/laravel-tail": "^4.3",
+    "wikimedia/composer-merge-plugin": "dev-master"
   },
-  "license": "mit",
+  "require-dev": {
+    "facade/ignition": "^2.5",
+    "fakerphp/faker": "^1.9.1",
+    "laravel/sail": "^1.0.1",
+    "mockery/mockery": "^1.4.2",
+    "nunomaduro/collision": "^5.0",
+    "phpunit/phpunit": "^9.3.3"
+  },
+  "license": "MIT",
   "authors": [
     {
-      "name": "Juan Miguel Torres",
-      "email": "wanmigs@gmail.com",
-      "homepage": "https://github.com/wanmigs/laravel-auth"
+      "name": "Joel Jr",
+      "email": "joelbb01@gmail.com"
     }
   ],
   "autoload": {
@@ -27,6 +45,7 @@
       ]
     }
   },
+
   "minimum-stability": "dev",
   "prefer-stable": true
 }

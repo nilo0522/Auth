@@ -81,6 +81,14 @@ const Sidebar = () => {
             >
               Session
             </NavLink>
+            
+            <NavLink
+              to="/mail"
+              activeClassName="font-bold text-white"
+              className="flex items-center ml-3 py-1"
+            >
+              Mail
+            </NavLink>
          
         </div>
       </nav>

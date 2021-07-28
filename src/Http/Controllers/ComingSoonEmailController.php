@@ -3,11 +3,14 @@
 namespace Fligno\Auth\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Fligno\Auth\Mail\WebsiteLaunched;
-use Fligno\Auth\Models\AppSetting;
+//use Fligno\Auth\Mail\WebsiteLaunched;
+use App\Mail\WebsiteLaunched;
+//use Fligno\Auth\Models\AppSetting;
 use Fligno\Auth\Models\Newsletter;
 use Illuminate\Support\Facades\Mail;
-
+use Fligno\Auth\Models\AppSetting;
+use Illuminate\Http\Request;
+use Fligno\Auth\Models\User;
 class ComingSoonEmailController extends Controller
 {
     /**
@@ -17,13 +20,20 @@ class ComingSoonEmailController extends Controller
      */
     public function index()
     {
-        $subject = AppSetting::where('key', 'coming_soon_email_subject')->first();
-        $content = AppSetting::where('key', 'coming_soon_email_content')->first();
+        //$subject = AppSetting::where('subject', 'subject')->first();
+       // $content = AppSetting::where('key', 'content')->first();
 
-        return response()->json([
+        /*return response()->json([
             'coming_soon_email_subject' => $subject->value,
             'coming_soon_email_content' => $content->value,
-        ]);
+        ]);*/
+        $fetch = AppSetting::all()->count();
+        if($fetch >0 )
+        {
+            $comingsoon = AppSetting::first()->get();
+            return response()->json($comingsoon);
+        }
+
     }
 
     /**
@@ -31,22 +41,17 @@ class ComingSoonEmailController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update()
+    public function update(Request $request)
     {
         request()->validate([
-            'coming_soon_email_subject' => 'required',
-            'coming_soon_email_content' => 'required',
+            'subject' => 'required',
         ]);
+        $app_setting = new AppSetting;
+        $app_setting ->subject = $request -> subject;
+        $app_setting ->content = $request -> content;
+        $app_setting -> save();
 
-        AppSetting::where('key', 'coming_soon_email_subject')->update([
-            'value' => request()->coming_soon_email_subject
-        ]);
-
-        AppSetting::where('key', 'coming_soon_email_content')->update([
-            'value' => request()->coming_soon_email_content
-        ]);
-
-        return response()->json([], 204);
+        return response()->json($app_setting, 204);
     }
 
     /**
@@ -54,12 +59,10 @@ class ComingSoonEmailController extends Controller
      */
     public function send()
     {
-        $emails = Newsletter::all()->pluck('email')->toArray();
-
-        foreach ($emails as $email) {
+        $emails = NewsLetter::all();
+        foreach($emails as $email)
+        {
             Mail::to($email)->send(new WebsiteLaunched());
         }
-
-        return response()->json([], 204);
     }
 }

@@ -5,7 +5,7 @@ namespace Fligno\Auth\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Fligno\Auth\Models\Newsletter;
 use Fligno\Auth\Traits\Paginators;
-use Fligno\Auth\Resources\PaginationCollection;
+use Fligno\Auth\Resource\PaginationCollection;
 
 class NewsletterController extends Controller
 {

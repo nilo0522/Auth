@@ -1,5 +1,5 @@
 <?php
-use Fligno\Auth\Events\WebSocketEvent;
+use Fligno\Auth\Events\EventUserExpireToken;
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('users/me', function () {
         return request()->user();
@@ -49,7 +49,12 @@ Route::group(['middleware' => ['auth:api', 'role:Admin']], function () {
 
     Route::apiResource('setting','SettingController');
     Route::get('setting-session','SettingController@index');
-    broadcast(new WebSocketEvent('toxen-update'));
+     
+    Route::get('mail','EmailController@index');
+    Route::post('mail','EmailController@store');
+    
+
+    broadcast(new EventUserExpireToken('token-update'));
 });
 
 Route::post('newsletters', 'NewsletterController@store');

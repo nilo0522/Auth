@@ -15,7 +15,7 @@ const CreateResrource = lazy(() => import("~/pages/resource/create"));
 const EditResrource = lazy(() => import("~/pages/resource/edit"));
 
 const SessionTimeout = lazy(() => import("~/pages/session"));
-
+const Email = lazy(() => import("~/pages/mail"));
 
 const routes = [
   {
@@ -76,6 +76,12 @@ const routes = [
     path:"/session-setting",
     exact:true,
     component: () => <SessionTimeout/>
+
+  },
+  {
+    path:"/mail",
+    exact:true,
+    component: () => <Email/>
 
   }
 ];
