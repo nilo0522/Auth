@@ -17,10 +17,40 @@ class SettingController extends Controller
      */
     public function index()
     {
-        //$user = auth()->guard('api')->user();
-      //  OauthToken::where('user_id',$user->id)->delete();
-      $setting = Setting::where('setting','Session')->first();
-        return response()->json($setting);
+     
+      $setting = Setting::where('setting','Session')->count();
+      if($setting >0)
+      {
+        $setting = Setting::where('setting','Session')->first();
+
+        $option = json_decode($setting->attr);
+          return response()->json(['setting'=> $setting,'option' => $option]);
+      }else
+      {
+          $setting = new Setting;
+          $setting -> setting ="Session";
+          $setting -> value = "Hour";
+          $setting -> attr = json_encode([
+            "option" =>
+            [
+                ["value" => "Seconds","text" => "Seconds"],
+                ["value" => "Minute","text" => "Minute"],
+                ["value" => "Hour","text" => "Hour"],
+                ["value" => "Day","text" => "Day"],
+                ["value" => "Week","text" => "Week"],
+                ["value" => "Month","text" => "Month"],
+                ["value" => "Year","text" => "Year"],
+
+            ]
+            ]);
+          $setting -> time = "2";
+          $setting -> component = "checkbox";
+          $setting->save();
+          $option = json_decode($setting->attr);
+          return response()->json(['setting'=> $setting,'option' => $option]);
+      }
+      
+      
     }
 
     /**
@@ -39,24 +69,14 @@ class SettingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $r)
+    public function store(Request $request)
     {
-        $f1 = Setting::where('setting','Session')->count();
-        if($f1 >0)
-        {
-          Setting::where('setting','Session')->update(['value' => $r->timeout_token,'attr' => $r->date]);
-        }else
-        {
-            $setting  = new Setting;
-            $setting -> setting = "Session";
-            $setting -> category = "";
-            $setting -> value = $r->timeout_token;
-            $setting -> attr = $r->date;
-           //$setting -> component = "select";
-            $setting->save();    
-        }
+       $setting = Setting::where('setting','Session')->first();
+       $setting = Setting::find($setting->id);
+       $setting->value = $request -> time;
+       $setting->time = $request -> timeout;
+       $setting->save();
         
-       // return 
     }
 
     /**

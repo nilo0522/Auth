@@ -17,9 +17,34 @@ class EmailController extends Controller
         if($fetch >0 )
         {
             $setting  = Setting::where('setting','Email')->first();
-            return response()->json($setting);
+           $attr =  json_decode($setting->attr);
+          
+            return response()->json(['attr'=>$attr,'setting' => $setting]);
         }
-        return response()->json([]);
+        else{
+            $setting = new Setting;
+            $setting -> setting = "Email";
+            $setting->attr = json_encode([
+              
+                    ['name' => 'Monday','checked' => false],
+                    ['name' => 'Tuesday','checked' => false],
+                    ['name' => 'Wednesday','checked' => false],
+                    ['name' => 'Thursday','checked' => false],
+                    ['name' => 'Friday','checked' => false],
+                    ['name' => 'Saturday','checked' => false],
+                    ['name' => 'Sunday','checked' => false],
+                    ['name' => 'Everyday','checked' => false]
+                    
+                ]);
+            $setting -> component ="checkbox";
+            $setting -> time = "12:00";
+            $setting -> value =json_encode(["Monday"]);
+            $setting->save();
+            $attr =  json_decode($setting->attr);
+          
+            return response()->json(['attr'=>$attr,'setting' => $setting]);
+        }
+        
        
     }
 
@@ -41,20 +66,13 @@ class EmailController extends Controller
      */
     public function store(Request $request)
     {
-        $fetch = Setting::where('setting','Email')->count();
-        if($fetch >0)
-        {
-          Setting::where('setting','Email')->update(['value' => $request->timeout_token,'attr' => $request->date]);
-        }else
-        {
-            $setting  = new Setting;
-            $setting -> setting = "Email";
-            $setting -> category = "";
-            $setting -> value = $request->email_schedule;
-            $setting -> attr = $request->date;
-           //$setting -> component = "select";
-            $setting->save();    
-        }
+        
+       $setting = Setting::where('setting','Email')->first();
+       $setting = Setting::find($setting->id);
+       $setting -> value = $request-> days;
+       $setting -> time = $request-> email_time;
+       $setting ->save();
+       return response()->json($setting);
     }
 
     /**

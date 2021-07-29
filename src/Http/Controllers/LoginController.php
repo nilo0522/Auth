@@ -38,7 +38,7 @@ class LoginController extends Controller
     }
 	public function logout()
 { 
-	auth()->user()->token()->revoke();
+//	auth()->user()->token()->revoke();
     
 	   return redirect('admin/login');
     

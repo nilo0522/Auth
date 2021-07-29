@@ -18,7 +18,7 @@ GET  /api/me
 #### 1. Install via composer
 
 ```
-composer require fligno/user-management
+composer require wanmigs/laravel-auth
 ```
 
 #### 2. Publish resource file
@@ -33,13 +33,53 @@ If you have a separate frontend, you can copy the published files into your fron
 
 Aside from the ReactJS components, this command will also publish the `config/frontend.php` file and the `tests` files.
 
-#### 3. Install the dependencies
+#### 3. Add the published files to `webpack.mix.js`
+
+```js
+mix
+  .sass("resources/sass/app.scss", "public/css")
+  .react("resources/js/auth/login.js", "public/js") // Add this line of code
+  .react("resources/js/auth/register.js", "public/js") // Add this line of code
+  .react("resources/js/auth/verification.js", "public/js") // Add this line of code
+  .react("resources/js/auth/forget-password.js", "public/js") // Add this line of code
+  .react("resources/js/auth/reset-password.js", "public/js") // Add this line of code
+  .react("resources/js/home.js", "public/js") // Add this line of code
+  .react("resources/js/admin/app.js", "public/js/admin") // Add this line of code
+  .react("resources/js/admin/pages/login.js", "public/js/admin"); // Add this line of code
+
+mix.webpackConfig({
+  resolve: {
+    extensions: [".js", ".json", ".vue"],
+    alias: {
+      "~": path.join(__dirname, "./resources/js/admin")
+    }
+  },
+  output: {
+    publicPath: "/",
+    chunkFilename: "js/admin/[name].js"
+  }
+});
+```
+
+#### 4. Add `package.json` dependecies
+
+```json
+"@babel/preset-react": "^7.0.0",
+"react": "^16.2.0",
+"react-dom": "^16.2.0",
+"js-cookie": "^2.2.1",
+"lodash.debounce": "^4.0.8",
+"pretty-checkbox-react": "^1.1.0",
+"react-router-dom": "^5.1.2"
+```
+
+#### 5. Install the dependencies
 
 ```
 npm install && npm run dev
 ```
 
-#### 4. Run the passport migrations & commands
+#### 6. Run the passport migrations & commands
 
 This package also installs the Laravel Passport automatically so you need to run the following commands for the Laravel Passport to work.
 
@@ -51,7 +91,7 @@ php artisan migrate
 php artisan passport:install
 ```
 
-#### 5. Prepare your `User` model
+#### 7. Prepare your `User` model
 
 Your user model should have the following:
 
@@ -78,7 +118,7 @@ class User extends Authenticatable implements MustVerifyEmail
 }
 ```
 
-#### 6. Add `Passport::routes()` to your `AuthServiceProvider@boot`
+#### 8. Add `Passport::routes()` to your `AuthServiceProvider@boot`
 
 ```php
 /**
@@ -94,8 +134,28 @@ public function boot()
 }
 ```
 
+#### 9. Change your auth driver to `api` in your `config/auth.php`
 
-#### 7. Replace the `/` route with this:
+```php
+'defaults' => [
+    'guard' => 'api', // change from 'web' to 'api'
+    'passwords' => 'users',
+],
+
+'guards' => [
+    'web' => [
+        'driver' => 'session',
+        'provider' => 'users',
+    ],
+
+    'api' => [
+        'driver' => 'passport', // change from 'api' to 'passport'
+        'provider' => 'users',
+    ],
+],
+```
+
+#### 10. Replace the `/` route with this:
 
 ```php
 Route::view('/', 'Auth::welcome');
