@@ -34,38 +34,39 @@ class EventUserExpireToken implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-      $time = Setting::where('setting','Session')->get();
+      $setting = Setting::where('setting','Session')->get();
       if(count($time)>0)
       {
-        $time = Setting::where('setting','Session')->first();
-        $value = Setting::where('setting','Session')->first()->value;
+        $setting = Setting::where('setting','Session')->first();
+        $time = Setting::where('setting','Session')->first()->time;
         $user = auth()->guard('api')->user();
       
          if($user !=null)
          {
            $expire_in="";
-           switch($time->attr)
+           switch($setting->value)
            {
              case "Seconds":
-                      $expire_in = now()->addSecond($value);
+                      $expire_in = now()->addSecond($time);
+                      info('ok');
                       break;
              case "Minute":
-                      $expire_in = now()->addMinute($value);
+                      $expire_in = now()->addMinute($time);
                       break;
              case "Hour":
-                      $expire_in = now()->addHour($value);
+                      $expire_in = now()->addHour($time);
                       break;
              case "Day":
-                      $expire_in = now()->addDay($value);
+                      $expire_in = now()->addDay($time);
                       break;
              case "Week":
-                      $expire_in = now()->addWeek($value);
+                      $expire_in = now()->addWeek($time);
                       break;
             case "Month":
-                      $expire_in = now()->addMonth($value);
+                      $expire_in = now()->addMonth($time);
                       break;
              case "Year":
-                      $expire_in = now()->addYear($value);
+                      $expire_in = now()->addYear($time);
                       break;
     
            }
