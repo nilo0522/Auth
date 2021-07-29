@@ -7,6 +7,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import api from "../../api"; 
 import axios from 'axios'
+import swal from 'sweetalert';
+
 const Email = () =>
 {
 
@@ -93,8 +95,9 @@ const Email = () =>
         `Email schedule successfully save`,
         //`/admin/mail`
       );*/
-      api.setEmailSchedule(formdata);
+      api.setEmailSchedule(formdata)
       setLoading(false);
+      swal("Schedule save successfully!", "Ok!", "success");
       //setErrors(errors || {});
     };
   
