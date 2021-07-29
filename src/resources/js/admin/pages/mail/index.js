@@ -2,8 +2,11 @@ import React, { useRef,useState,useEffect } from "react";
 import { Button, Form } from "~/components";
 import { NavLink } from "react-router-dom";
 import { formSubmit } from "~/helpers/utilities";
-
-
+import TimePicker from 'react-time-picker';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import api from "../../api"; 
+import axios from 'axios'
 const Email = () =>
 {
 
@@ -12,90 +15,160 @@ const Email = () =>
     const [loading, setLoading] = useState(false);
     const [setting, setSetting] = useState([]);
     const [isloading, setIsLoading] = useState(false);
-    const [dt,setDt] = useState('')
-    const [time_value,setTime] = useState(1)
+    const [email_time, setEmailTime] = useState('12:00');
+    const [checked,setChecked] = useState([])
+    
+    const [days,setDays] = useState([]);
+
+    
+     
+    const handleChange = (e) => {
+      let check = [...days]
+      let all = true
+      if(e.target.value === "Everyday")
+      {
+        
+        check.map(row=>{
+          if(e.target.checked == true)
+          {
+            row.checked = true
+          }else
+          {row.checked = false}
+          
+        })
+      }else
+      {
+        
+    check.map(row=>{
+           
+
+           if(row.name === e.target.value){
+               row.checked = e.target.checked
+             
+            }else
+            {
+              if(row.name =="Everyday")
+               row.checked = false
+            }
+            if(row.checked == false && row.name !="Everyday")
+            {
+              all = false
+              
+            }
+           
+     })
+  
+      if(all)
+      {
+        
+        check.map(e=>{
+          if(e.name === "Everyday")
+           e.checked = true
+        })
+      }
+    }
+      setDays(check)
+      
+    };
+   
     const handleSubmit = async evt => {
       evt.preventDefault();
-      let formData = new FormData(form.current);
-      window.loadingStatus = `Saving data...`;
+      let formdata = new FormData();
+        formdata.append('email_time',email_time)
+        days.map(row=>{
+          if(row.checked)
+          {
+            formdata.append('days[]',row.name)
+          }
+         
+        })
+     
+     // window.loadingStatus = `Saving data...`;
       setLoading(true);
   
-      let errors = await formSubmit(
+     /* let errors = await formSubmit(
         `post`,
         `/api/mail`,
-        formData,
+        formdata,
         `Email schedule successfully save`,
-        `/admin/mail`
-      );
+        //`/admin/mail`
+      );*/
+      api.setEmailSchedule(formdata);
       setLoading(false);
-      setErrors(errors || {});
+      //setErrors(errors || {});
     };
   
     useEffect(() => {
       const fetchData = async () => {
         const {data} = await axios.get(`/api/mail`)
-         
-          setSetting(data)
-          setDt(data.attr)
-          setTime(data.value)
-          
-          if(data.attr != null)
-          {
-            $('#date').val(data.attr)
-            $('#email_time').val(data.value)
-          }else {$('#email_time').val(1); $('#date').val()}
-         
-        setIsLoading(true)
-        
       
+          setSetting(data.setting)
+          setChecked(JSON.parse(data.setting.value))
        
+          setIsLoading(true)
+          setEmailTime(data.setting.time)
+          let check = data.attr
+          
+          check.map(row=>{
+            
+            JSON.parse(data.setting.value).map(row2=>{                   
+                if(row.name == row2)
+                {row.checked =true   }})})
+
+           setDays(check)
       };
       fetchData();
     },[])
-
-
-return(
-    <form className="w-full max-w-sm" ref={form} onSubmit={handleSubmit}>
-    <div className="md:flex md:items-center mb-6">
-      <div className="md:w-1/2 ml-3 mr-3">
-        <label className="block text-black-500 font-bold md:text-right mb-1 md:mb-0 " htmlFor="inline-full-name">
-         Mail set schedule
-        </label>
-      </div>
-      <div className="md:w-1/3">
-      <select id="date" name="date" autoComplete="date"   className="ml-3 mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-        <option selected disabled>Select</option>
-      
-        <option >Minute</option>
-        <option>Hour</option>
-        <option>Day</option>
-        <option>Week</option>
-        <option>Month</option>
-        <option>Year</option>
-        
     
-                   
-                   
-                  </select>
-      </div>
-      <div className="md:w-1/3">
-       
-         {/* <input type="number" name="email_time" autoComplete="timeout" id="email_time"  className="ml-5 mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
-          min={1}/>*/}
+  
+
+    
+return(
+  <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+  <div className="relative py-3 sm:max-w-xl sm:mx-auto">
+    <div className="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
+      <div className="max-w-md mx-auto">
+        <div className="flex items-center space-x-5">
+          <div className="h-14 w-14 bg-yellow-200 rounded-full flex flex-shrink-0 justify-center items-center text-yellow-500 text-2xl font-mono"><i className="fa fa-clock"></i></div>
+          <div className="block pl-2 font-semibold text-xl self-start text-gray-700">
+            <h2 className="leading-relaxed">Set Email Schedule</h2>
+            <p className="text-sm text-gray-500 font-normal leading-relaxed">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+          </div>
+        </div>
+        <div className="divide-y divide-gray-200">
+          
+          <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+            <div className="flex flex-col">
+              <label className="leading-loose">Set Time</label>
+              <TimePicker
+                onChange={setEmailTime}
+                value={email_time}
+              />
+            </div>
+            <div className="flex flex-col">
+              <label className="leading-loose">Repeat</label>
+              {isloading  && days.map((check,index)=>{
+                return  (<FormControlLabel
+                key={index}
+                control={<Checkbox onChange={handleChange} value={check.name} checked={check.checked}  />}
+                label={check.name}
+               
+              />)
+              })}
+              </div>
+              </div>
+              <div className="pt-4 flex items-center space-x-4">
+                <button onClick={handleSubmit} className="bg-blue-500 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none">Save</button>
+          </div>
+         
+        </div>
       </div>
     </div>
-   <div className="md:w-1/3">
-   <Button
-            disabled={loading}
-            className={`bg-blue-500 hover:bg-blue-700 text-white mr-4`}
-          >
-            {loading && <i className="fa fa-circle-notch fa-spin mr-2" />}{" "}
-            Save
-          </Button>
-   </div>
-     
-   
-  </form>
+  </div>
+</div>
+  
+
   );
 }
+
   export default Email;

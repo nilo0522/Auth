@@ -3,14 +3,12 @@
 namespace Tests\Feature;
 
 use App\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 
 class LoginTest extends TestCase
 {
-    use RefreshDatabase;
-
+    /** @test */
     public function setUp() : void
     {
         parent::setUp();
@@ -19,20 +17,26 @@ class LoginTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_login()
+    public function admin_can_login()
+    {
+
+        $this->withoutExceptionHandling();
+
+        $this->postJson('/api/admin/login', ['email' => 'admin@fligno.com', 'password' => "Default123"])
+            ->assertSuccessful()
+            ->assertJsonStructure(['access_token', 'token_type', 'expires_at']);
+    }
+
+    /** @test */
+    public function user_can_login()
     {
         $this->withoutExceptionHandling();
 
-        $password = 'secret123';
-        $user = factory(User::class)->create([
-            'email' => 'test@fligno.com',
-            'password' => bcrypt($password),
-        ]);
+        $this->postJson('/api/login', ['email' => 'admin@fligno.com', 'password' => "Default123"])
+            ->assertSuccessful()
+            ->assertJsonStructure(['access_token', 'token_type', 'expires_at']);
 
-        $this->postJson('api/login', ['email' => 'test@fligno.com', 'password' => $password])
-             ->assertSuccessful()
-             ->assertJsonStructure(['access_token', 'token_type', 'expires_at']);
-
-        $this->assertAuthenticatedAs($user, 'web');
     }
+
+
 }

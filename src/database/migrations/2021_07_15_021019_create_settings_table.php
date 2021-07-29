@@ -20,6 +20,7 @@ class CreateSettingsTable extends Migration
             $table->text('value')->nullable();
             $table->text('attr')->nullable();
             $table->enum('component',['text','textarea','select','radio','checkbox','modal'])->nullable();
+            $table->string("time")->nullable();
             $table->timestamps();
         });
     }

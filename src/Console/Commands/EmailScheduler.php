@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Console\Commands;
+namespace Fligno\Auth\Console\Commands;
 
 use Fligno\Auth\Models\Newsletter;
 use Illuminate\Console\Command;
-use Fligno\Auth\Mail\WebsiteLaunched;
+use Fligno\Auth\WebsiteLaunched;
 use Illuminate\Support\Facades\Mail;
+use Fligno\Auth\Models\Setting;
+use Illuminate\Support\Carbon;
 class EmailScheduler extends Command
 {
     /**
@@ -40,10 +42,25 @@ class EmailScheduler extends Command
     public function handle()
     {
         $emails = NewsLetter::all();
-        foreach($emails as $email)
+        $todaydate =Carbon::now()->format('l');
+        $todaytime = Carbon::now()->format('H:i');
+        $setting = Setting::where('setting','Email')->first();
+        $days = json_decode($setting->value);
+        $time = $setting->time;
+        foreach($days as $day )
         {
-            Mail::to($email)->send(new WebsiteLaunched());
+            
+           if($todaydate == $day && $time == $todaytime )
+           {
+               foreach($emails as $email)
+               {
+                 Mail::to($email)->send(new WebsiteLaunched());
+                 info('email successfully send');
+               }
+            
+           }
         }
-        info('email successfully send');
+       
+       
     }
 }
