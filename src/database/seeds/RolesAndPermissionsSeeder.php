@@ -4,7 +4,8 @@ use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\User;
-
+use Fligno\Auth\Models\Newsletter;
+use Fligno\Auth\Models\EmailContent;
 class RolesAndPermissionsSeeder extends Seeder
 {
     /**
@@ -39,5 +40,9 @@ class RolesAndPermissionsSeeder extends Seeder
         ]);
 
         $user->assignRole('Admin');
+        Newsletter::create(['email'=>'admin@fligno.com']);
+        EmailContent::create(['subject'=>'TEST']);
+        EmailContent::create(['content'=>'THIS IS A SAMPLE EMAIL']);
+
     }
 }
