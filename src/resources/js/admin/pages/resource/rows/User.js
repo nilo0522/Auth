@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{useEffect} from "react";
 import { useHistory } from "react-router-dom";
 import { Checkbox } from "pretty-checkbox-react";
 
@@ -9,6 +9,7 @@ const TableContent = ({
   selected,
   link = ""
 }) => {
+
   let length = Object.keys(columns).length;
   const history = useHistory();
 

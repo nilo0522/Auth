@@ -1,5 +1,4 @@
 import React, { lazy,useEffect } from "react";
-import Socket_Conn from "../../socket_con";
 const Roles = lazy(() => import("~/pages/roles"));
 const CreateRole = lazy(() => import("~/pages/roles/create"));
 const EditRole = lazy(() => import("~/pages/roles/edit"));
@@ -16,7 +15,9 @@ const EditResrource = lazy(() => import("~/pages/resource/edit"));
 
 const SessionTimeout = lazy(() => import("~/pages/session"));
 const Email = lazy(() => import("~/pages/mail"));
-
+const Organization = lazy(() => import("~/pages/organization"));
+const CreateOrganization = lazy(() => import("~/pages/organization/create"));
+const EditOrganization = lazy(()=> import("~/pages/organization/edit"));
 const routes = [
   {
     path: "/",
@@ -82,6 +83,24 @@ const routes = [
     path:"/mail",
     exact:true,
     component: () => <Email/>
+
+  },
+  {
+    path:"/organization",
+    exact:true,
+    component: () => <Organization/>
+
+  },
+  {
+    path:"/organization/create",
+    exact:true,
+    component: () => <CreateOrganization/>
+
+  },
+  {
+    path:"/organization/edit/:id",
+    exact:true,
+    component: () => <EditOrganization/>
 
   }
 ];

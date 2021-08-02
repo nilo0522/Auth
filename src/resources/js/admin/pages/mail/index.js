@@ -113,17 +113,20 @@ const Email = () =>
           let check = data.attr
           
           check.map(row=>{
-            
+            if(data.setting.value !=null)
+            {
             JSON.parse(data.setting.value).map(row2=>{                   
                 if(row.name == row2)
-                {row.checked =true   }})})
+                {row.checked =true   }
+              })}})
+            
 
            setDays(check)
       };
       fetchData();
     },[])
     
-  
+ 
 
     
 return(

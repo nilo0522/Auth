@@ -1,15 +1,11 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Button, Table, Header, Row } from "~/components";
 import Rows from "~/pages/resource/rows";
 import { NavLink } from "react-router-dom";
 import { swalDelete } from "~/helpers/utilities";
 let debounce = require("lodash.debounce");
 
-const columns = {
-  name: {
-    label: "Name"
-  }
-};
+
 
 const DataTable = ({
   columns,
@@ -27,7 +23,7 @@ const DataTable = ({
   const [toggleFetch, setToggleFetch] = useState(false);
 
   let TableRow = Rows.hasOwnProperty(row) ? Rows[row] : Row;
-
+  
   const handleSearch = debounce(keyword => {
     setKeyword(keyword);
   }, 800);

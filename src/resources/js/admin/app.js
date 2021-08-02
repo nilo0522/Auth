@@ -3,7 +3,7 @@ import React, { Suspense, lazy, useState,useEffect } from "react";
 import ReactDOM from "react-dom";
 import { Sidebar, Content, Loader } from "./components";
 import { BrowserRouter as Router } from "react-router-dom";
-import Socket_Conn from "../socket_con";
+
 import Cookie from "js-cookie";
 
 const Login = lazy(() => import("~/pages/login"));
