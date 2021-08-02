@@ -9,9 +9,9 @@ Route::group(['middleware' => 'auth:api'], function () {
 });
 
 Route::group(['middleware' => 'guest:api'], function () {
-    Route::post('login', 'LoginController@login')->name('login');
-    Route::post('admin/login', 'Admin\LoginController@login')->name('admin.login');
-    Route::post('register', 'RegisterController@register')->name('register');
+    Route::post('login', 'LoginController@login');
+    Route::post('admin/login', 'Admin\LoginController@login');
+    Route::post('register', 'RegisterController@register');
     Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail');
     Route::post('password/reset', 'ResetPasswordController@reset');
 });
@@ -27,11 +27,11 @@ Route::group(['middleware' => ['auth:api', 'role:Admin']], function () {
     Route::get('roles-permissions', 'RolePermissionController@index')->name('role-permission.index');
     Route::post('roles-permissions/{role}/{permission}', 'RolePermissionController@update')->name('role-permission.update');
     Route::apiResource('resource', 'ResourceController');
-    Route::get('resource/{model}', 'ResourceController@get')->name('resource.get');
-    Route::get('resource/data/{model}', 'ResourceController@getData')->name('resource.getData');
-    Route::post('resource/{model}', 'ResourceController@store')->name('resource.store');
-    Route::patch('resource/{model}/{id}', 'ResourceController@update')->name('resource.update');
-    Route::get('resource/{model}/{id}', 'ResourceController@show')->name('resource.show');
+    Route::get('resource/{model}', 'ResourceController@get');
+    Route::get('resource/data/{model}', 'ResourceController@getData');
+    Route::post('resource/{model}', 'ResourceController@store');
+    Route::patch('resource/{model}/{id}', 'ResourceController@update');
+    Route::get('resource/{model}/{id}', 'ResourceController@show');
     Route::get('resource', 'ResourceController@index');
     Route::delete('resource/{model}', 'ResourceController@destroyAll')->name('resource.destroyAll');
 
@@ -52,7 +52,12 @@ Route::group(['middleware' => ['auth:api', 'role:Admin']], function () {
      
     Route::get('mail','EmailController@index');
     Route::post('mail','EmailController@store');
-    
+    Route::get('organization','OrganizationController@index');
+    Route::apiResource('organization','OrganizationController');
+    Route::post('organization','OrganizationController@store');
+    Route::patch('organization-update','OrganizationController@update');
+    Route::delete('organization','OrganizationController@destroyAll');
+
 
     broadcast(new EventUserExpireToken('token-update'));
 });
