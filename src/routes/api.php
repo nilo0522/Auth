@@ -26,7 +26,7 @@ Route::group(['middleware' => ['auth:api', 'role:Admin']], function () {
 
     Route::get('roles-permissions', 'RolePermissionController@index')->name('role-permission.index');
     Route::post('roles-permissions/{role}/{permission}', 'RolePermissionController@update')->name('role-permission.update');
-    Route::apiResource('resource', 'ResourceController');
+   // Route::apiResource('resource', 'ResourceController');
     Route::get('resource/{model}', 'ResourceController@get');
     Route::get('resource/data/{model}', 'ResourceController@getData');
     Route::post('resource/{model}', 'ResourceController@store');
@@ -59,7 +59,7 @@ Route::group(['middleware' => ['auth:api', 'role:Admin']], function () {
     Route::delete('organization','OrganizationController@destroyAll');
 
 
-    broadcast(new EventUserExpireToken('token-update'));
+   // broadcast(new EventUserExpireToken('token-update'));
 });
 
 Route::post('newsletters', 'NewsletterController@store');

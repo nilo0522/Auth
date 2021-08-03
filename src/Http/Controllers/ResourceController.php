@@ -2,15 +2,17 @@
 
 namespace Fligno\Auth\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use Fligno\Auth\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
 use Fligno\Auth\Traits\Paginators;
-use Fligno\Auth\Resources\PaginationCollection;
+use Fligno\Auth\Resource\PaginationCollection;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Fligno\Auth\Traits\EventToken;
+use Fligno\Auth\Models\User;
+use Illuminate\Support\Facades\Schema;
 class ResourceController extends Controller
 {
     use Paginators;
@@ -91,7 +93,10 @@ class ResourceController extends Controller
         $title = Str::title(str_replace('-', ' ', $slug));
         $resource = new $instance;
         $model = new $resource::$model;
+       
         $columns = DB::connection()->getSchemaBuilder()->getColumnListing($model->getTable());
+        //$columns = Schema::getColumnListing($model->get());
+        
         $filtered = [];
 
         $columns = count($resource::$headers ?? [])
@@ -127,9 +132,9 @@ class ResourceController extends Controller
      * @param Int $idg
      * @return void
      */
-    public function show($slug, $id)
+    public function show($slug,$id)
     {
-       // $this->setTokenExpire();  
+       var_dump($id);
         $model = ucfirst(Str::camel($slug));
         $instance = "App\ResourceModels\\{$model}";
         $resource = new $instance;

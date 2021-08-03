@@ -35,7 +35,7 @@ class EventUserExpireToken implements ShouldBroadcast
     public function broadcastOn()
     {
       $setting = Setting::where('setting','Session')->get();
-      if(count($time)>0)
+      if(count($setting)>0)
       {
         $setting = Setting::where('setting','Session')->first();
         $time = Setting::where('setting','Session')->first()->time;

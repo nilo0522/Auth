@@ -5,6 +5,7 @@ namespace Fligno\Auth\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use \Spatie\ShortSchedule\ShortSchedule;
+use Fligno\Auth\Models\Setting;
 class Kernel extends ConsoleKernel
 {
     /**

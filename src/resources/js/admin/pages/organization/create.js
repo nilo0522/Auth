@@ -19,7 +19,7 @@ const Create = () => {
       `post`,
       `/api/organization`,
       formData,
-      `Role successfully added`,
+      `Organization successfully added`,
       `/admin/organization`
     );
     setLoading(false);

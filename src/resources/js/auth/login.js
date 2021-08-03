@@ -42,7 +42,7 @@ const App = () => {
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="username"
             >
-              Email
+             Email
             </label>
             <input
               name="email"

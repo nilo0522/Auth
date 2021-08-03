@@ -19,7 +19,7 @@ const App = () => {
       let { data } = await axios.post("/api/admin/login", formData);
       Cookie.set("oToken_admin", data.access_token);
 
-      window.location.href = "/admin";
+      window.location.href = "/admin/home";
     } catch (error) {
       let { data } = error.response;
       errors = data.errors;

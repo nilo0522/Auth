@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace Fligno\Auth\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
