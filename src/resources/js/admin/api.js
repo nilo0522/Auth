@@ -9,5 +9,10 @@ export default
     axios.post(`${BASE_API_URL}/mail`,data,{
         Accept: 'application/json',
         'Content-Type': 'multipart/form-data',
+    }),
+    setTimeZone : (data) => 
+    axios.post(`${BASE_API_URL}/timezone`,data,{
+        Accept: 'application/json',
+        'Content-Type': 'multipart/form-data',
     })
 }

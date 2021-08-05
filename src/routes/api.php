@@ -1,6 +1,6 @@
 <?php
 use Fligno\Auth\Events\EventUserExpireToken;
-Route::group(['middleware' => 'auth:api'], function () {
+    Route::group(['middleware' => 'auth:api'], function () {
     Route::get('users/me', function () {
         return request()->user();
     });
@@ -57,9 +57,10 @@ Route::group(['middleware' => ['auth:api', 'role:Admin']], function () {
     Route::post('organization','OrganizationController@store');
     Route::patch('organization-update','OrganizationController@update');
     Route::delete('organization','OrganizationController@destroyAll');
+    Route::get('timezone','TimeZoneController@index');
+    Route::post('timezone','TimeZoneController@store');
 
-
-   // broadcast(new EventUserExpireToken('token-update'));
+    //broadcast(new EventUserExpireToken('token-update'));
 });
 
 Route::post('newsletters', 'NewsletterController@store');
