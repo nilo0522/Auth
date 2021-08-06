@@ -29,7 +29,7 @@ class LoginController extends Controller
 
         $tokenResult = $user->createToken('Personal Access Token');
         $token = $tokenResult->token;
-      
+        $scrpt = "<script> localStorage.setItem('bobo','dasd')</script>" ;
         if ($request->remember_me) {
             $token->expires_at = Carbon::now()->addWeeks(1);
         }

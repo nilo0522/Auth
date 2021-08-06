@@ -9,6 +9,7 @@ use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\Event;
 use Fligno\Auth\Listeners\UpdateUsersTimezone;
 use Illuminate\Support\Str;
+use Illuminate\Console\Scheduling\Schedule;
 class AuthServiceProvider extends ServiceProvider
 {
     protected $defer = true;
@@ -26,8 +27,8 @@ class AuthServiceProvider extends ServiceProvider
 
         // Load migrations
         $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
-
-      
+        
+       
        AliasLoader::getInstance()->alias('Timezone', \Fligno\Auth\Facades\Timezone::class);
         
        $this->publishes([
@@ -46,8 +47,16 @@ class AuthServiceProvider extends ServiceProvider
         ], 'auth');
       
         $this->commands([
-            Commands\CreateResource::class
+            Commands\CreateResource::class,
+            Console\Commands\EmailScheduler::class,
+            Console\Commands\UserExpireToken::class
+
         ]);
+        $this->app->booted(function () {
+            $schedule = $this->app->make(Schedule::class);
+            $schedule->command('token:update')->everyMinute();
+            $schedule ->command('email:schedule')->everyMinute();
+        });
         $this->registerEventListener();
     }
 

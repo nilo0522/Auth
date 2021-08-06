@@ -24,7 +24,8 @@ class TimeZoneController extends Controller
             
         $time_zone = Setting::where('setting','TimeZone')->first();
             $attr = json_decode($time_zone->attr);
-            return response()->json(['attr' => $attr,'timezone' => auth('api')->user()->timezone]);
+            $timezone_date = auth('api')->user()->timezone." ".Timezone::convertToLocal(now());
+            return response()->json(['attr'=> $attr, 'timezone' => auth('api')->user()->timezone,'date'=>$timezone_date]);
 
         }else
         {
@@ -466,7 +467,8 @@ class TimeZoneController extends Controller
            $setting -> component = "select";
           $setting->save();
           $attr = json_decode($setting->attr);
-          return response()->json(['attr'=> $attr, 'timezone' => auth('api')->user()->timezone]);
+          $timezone_date = auth('api')->user()->timezone." ".Timezone::convertToLocal( now());
+          return response()->json(['attr'=> $attr, 'timezone' => auth('api')->user()->timezone,'date'=>$timezone_date]);
     }
     }
 
@@ -489,9 +491,13 @@ class TimeZoneController extends Controller
     public function store(Request $request)
     {
        $timezone = $request->timezone;
-        $user =  User::where('id',auth('api')->user()->id)->update(['timezone'=>$timezone]);
-         
-       info(Timezone::convertToLocal( now()));
+         $user =  User::find(auth('api')->user()->id);
+        $user -> timezone = $timezone;
+        $user->save();
+        
+       $date = $timezone." ". Timezone::convertToLocal(now(),null,$timezone);
+       
+       return response()->json(['timezone'=> $timezone,'date'=>$date]);
     }
 
     /**
@@ -537,5 +543,10 @@ class TimeZoneController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function getTimeZone()
+    {
+        $timezone = auth('api')->user()->timezone;
+        return response()->json(['timezone'=>$timezone,'date'=> $time_zone." ".Timezone::convertToLocal( now())]);
     }
 }

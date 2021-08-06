@@ -17,10 +17,18 @@ class Timezone
         if (is_null($date)) {
             return 'Empty';
         }
+        $timezone = (auth('api')->user()->timezone) ?? config('app.timezone');
+        
+        if (!$format_timezone) {
+        
+            $date->setTimezone($timezone);
+            
+        }else{
+           $date->setTimezone($format_timezone);
+        }
+       
 
-        $timezone = (auth()->user()->timezone) ?? config('app.timezone');
-
-        $date->setTimezone($timezone);
+        
 
         if (is_null($format)) {
             return $date->format(config('timezone.format'));
@@ -28,9 +36,7 @@ class Timezone
 
         $formatted_date_time = $date->format($format);
 
-        if ($format_timezone) {
-            return $formatted_date_time . ' ' . $this->formatTimezone($date);
-        }
+        
 
         return $formatted_date_time;
     }
