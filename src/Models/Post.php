@@ -5,7 +5,11 @@ namespace Fligno\Auth\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class NewsLetter extends Model
+class Post extends Model
 {
     use HasFactory;
+    protected $fillable =[
+        'title',
+        'content'
+    ];
 }

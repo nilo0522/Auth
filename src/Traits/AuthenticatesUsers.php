@@ -18,7 +18,7 @@ trait AuthenticatesUsers
      */
     public function login(Request $request)
     {
-        $this->validateLogin($request);
+       // $this->validateLogin($request);
 
         if (!$this->attemptLogin($request)) {
             return $this->sendFailedLoginResponse();
@@ -66,6 +66,7 @@ trait AuthenticatesUsers
      */
     protected function attemptLogin(Request $request)
     {
+        //var_dump($request->password);
         return Auth::guard('web')->attempt(
             $this->credentials($request),
             $request->filled('remember')

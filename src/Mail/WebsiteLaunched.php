@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use App\Models\AppSetting;
+use Fligno\Auth\Models\EmailContent;
 class WebsiteLaunched extends Mailable
 {
     use Queueable, SerializesModels;
@@ -29,7 +29,7 @@ class WebsiteLaunched extends Mailable
     public function build()
     {
        // return $this->view('view.name');
-       $email = AppSetting::first();
+       $email = EmailContent::first();
        return $this->view('emails.email')->subject($email->subject);
     }
 }

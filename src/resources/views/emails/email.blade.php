@@ -1,5 +1,5 @@
 @php
- use App\Models\AppSetting;
+ use Fligno\Auth\Models\EmailContent;
 
 @endphp
 
@@ -137,4 +137,3 @@
     </body>
     
     </html>
-

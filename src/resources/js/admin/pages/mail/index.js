@@ -7,6 +7,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import api from "../../api"; 
 import axios from 'axios'
+import swal from 'sweetalert2';
+
 const Email = () =>
 {
 
@@ -93,8 +95,9 @@ const Email = () =>
         `Email schedule successfully save`,
         //`/admin/mail`
       );*/
-      api.setEmailSchedule(formdata);
+      api.setEmailSchedule(formdata)
       setLoading(false);
+      swal.fire("Schedule save successfully!");
       //setErrors(errors || {});
     };
   
@@ -110,23 +113,24 @@ const Email = () =>
           let check = data.attr
           
           check.map(row=>{
-            
+            if(data.setting.value !=null)
+            {
             JSON.parse(data.setting.value).map(row2=>{                   
                 if(row.name == row2)
-                {row.checked =true   }})})
+                {row.checked =true   }
+              })}})
+            
 
            setDays(check)
       };
       fetchData();
     },[])
     
-  
+ 
 
     
 return(
-  <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
-  <div className="relative py-3 sm:max-w-xl sm:mx-auto">
-    <div className="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
+ 
       <div className="max-w-md mx-auto">
         <div className="flex items-center space-x-5">
           <div className="h-14 w-14 bg-yellow-200 rounded-full flex flex-shrink-0 justify-center items-center text-yellow-500 text-2xl font-mono"><i className="fa fa-clock"></i></div>
@@ -163,9 +167,7 @@ return(
          
         </div>
       </div>
-    </div>
-  </div>
-</div>
+ 
   
 
   );

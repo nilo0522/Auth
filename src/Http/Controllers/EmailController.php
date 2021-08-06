@@ -66,6 +66,12 @@ class EmailController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+           'email_time' => 'required'
+            
+
+            
+        ]);
         
        $setting = Setting::where('setting','Email')->first();
        $setting = Setting::find($setting->id);
