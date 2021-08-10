@@ -97,6 +97,13 @@ const Sidebar = () => {
             >
               Organization
             </NavLink>
+            <NavLink
+              to="/timezone"
+              activeClassName="font-bold text-white"
+              className="flex items-center ml-3 py-1"
+            >
+              Time Zone
+            </NavLink>
          
         </div>
       </nav>

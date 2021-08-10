@@ -7,11 +7,10 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Fligno\Auth\Traits\Paginators;
 use Fligno\Auth\Resource\PaginationCollection;
-use Fligno\Auth\Traits\EventToken;
 class PermissionController extends Controller
 {
     use Paginators;
-    use EventToken;
+  
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +18,7 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        //$this->setTokenExpire();  
+        
         $permissions = Permission::query();
 
         if (request('all')) {
@@ -41,7 +40,7 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        //$this->setTokenExpire();  
+        
         request()->validate([
             'name' => 'required|unique:permissions',
         ]);
@@ -59,7 +58,7 @@ class PermissionController extends Controller
      */
     public function show(Permission $permission)
     {
-        //$this->setTokenExpire();  
+        
         return response($permission, 200);
     }
 
@@ -72,7 +71,7 @@ class PermissionController extends Controller
      */
     public function update(Request $request, Permission $permission)
     {
-        //$this->setTokenExpire();  
+        
         request()->validate([
             'name' => 'required',
         ]);

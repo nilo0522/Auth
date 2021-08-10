@@ -4,7 +4,7 @@ namespace Fligno\Auth\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\User;
+use App\Models\User;
 
 class UserActivationController extends Controller
 {
@@ -17,6 +17,7 @@ class UserActivationController extends Controller
      */
     public function update(User $user)
     {
+        
         $user = tap($user)->update([
             'deactivated_at' => request('isChecked') ? \Carbon\Carbon::now() : null
         ]);

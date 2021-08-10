@@ -18,6 +18,7 @@ const Email = lazy(() => import("~/pages/mail"));
 const Organization = lazy(() => import("~/pages/organization"));
 const CreateOrganization = lazy(() => import("~/pages/organization/create"));
 const EditOrganization = lazy(()=> import("~/pages/organization/edit"));
+const TimeZone = lazy(()=>import("~/pages/usertimezone"));
 const routes = [
   {
     path: "/",
@@ -101,6 +102,12 @@ const routes = [
     path:"/organization/edit/:id",
     exact:true,
     component: () => <EditOrganization/>
+
+  },
+  {
+    path:"/timezone",
+    exact:true,
+    component: () => <TimeZone/>
 
   }
 ];

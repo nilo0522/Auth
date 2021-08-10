@@ -111,7 +111,7 @@ class OrganizationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return response(204);
     }
     public function destroyAll()
     {

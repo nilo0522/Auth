@@ -39,7 +39,7 @@ class UserExpireToken extends Command
      */
     public function handle()
     {
-     $dt = Carbon::now();
+       $dt = Carbon::now();
        $oldToken = OauthToken::where('expires_at','<',$dt)->delete(); 
        info('Token deleted');
       

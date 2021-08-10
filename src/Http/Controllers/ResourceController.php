@@ -10,13 +10,12 @@ use Fligno\Auth\Traits\Paginators;
 use Fligno\Auth\Resource\PaginationCollection;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
-use Fligno\Auth\Traits\EventToken;
 use Fligno\Auth\Models\User;
 use Illuminate\Support\Facades\Schema;
 class ResourceController extends Controller
 {
     use Paginators;
-    use EventToken;
+ 
     
 
    
@@ -28,7 +27,7 @@ class ResourceController extends Controller
      */
     public function index()
     {
-        $this->setTokenExpire();  
+        
         if (!file_exists(app_path('ResourceModels'))) {
             return response([], 200);
         }
@@ -61,7 +60,7 @@ class ResourceController extends Controller
      */
     public function getData($slug)
     {
-       // $this->setTokenExpire();  
+       // "";  
         $model = ucfirst(Str::camel($slug));
         $instance = "App\ResourceModels\\{$model}";
         $resource = new $instance;
@@ -87,7 +86,7 @@ class ResourceController extends Controller
      */
     public function get($slug)
     {
-       // $this->setTokenExpire();  
+       // "";  
         $model = ucfirst(Str::camel($slug));
         $instance = "App\ResourceModels\\{$model}";
         $title = Str::title(str_replace('-', ' ', $slug));
@@ -153,7 +152,7 @@ class ResourceController extends Controller
      */
     public function store($slug)
     {
-        //$this->setTokenExpire();  
+        //"";  
         $model = ucfirst(Str::camel($slug));
         $instance = "App\ResourceModels\\{$model}";
         $resource = new $instance;
@@ -181,7 +180,7 @@ class ResourceController extends Controller
      */
     public function update($slug, $id)
     {
-        //$this->setTokenExpire();  
+        //"";  
         $model = ucfirst(Str::camel($slug));
         $instance = "App\ResourceModels\\{$model}";
         $resource = new $instance;
@@ -205,7 +204,7 @@ class ResourceController extends Controller
      */
     public function destroyAll($slug)
     {
-        //$this->setTokenExpire();  
+        //"";  
         $model = ucfirst(Str::camel($slug));
         $instance = "App\ResourceModels\\{$model}";
         $resource = new $instance;

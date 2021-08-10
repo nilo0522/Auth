@@ -7,14 +7,13 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Fligno\Auth\Traits\Paginators;
 use Fligno\Auth\Resource\PaginationCollection;
-use Fligno\Auth\Traits\EventToken;
 use App\Models\Setting;
 use Laravel\Passport\Passport;
 use Illuminate\Support\Carbon;
 class RoleController extends Controller
 {
    use Paginators;
-    use EventToken;
+  
 
     
     /**
@@ -33,7 +32,7 @@ class RoleController extends Controller
         $columns = ['name'];
 
         $data = $this->paginate($roles, $columns);
-         // $this->setTokenExpire();  
+     
         return new PaginationCollection($data);
         //return auth()->guard('api')->user();
         //$dt = Carbon::now();
@@ -68,7 +67,7 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-       // $this->setTokenExpire();  
+     
         return response($role, 200);
     }
 
@@ -81,7 +80,7 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
-        //$this->setTokenExpire();  
+         
         request()->validate([
             'name' => 'required',
         ]);
@@ -107,7 +106,7 @@ class RoleController extends Controller
      */
     public function destroyAll()
     {
-        //$this->setTokenExpire();  
+          
         Role::whereIn('id', request('ids'))->delete();
 
         return response([], 204);
