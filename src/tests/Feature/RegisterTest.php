@@ -4,18 +4,26 @@ namespace Tests\Feature;
 
 use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
-
+use App\Models\User;
 class RegisterTest extends TestCase
 {
 
     public function setUp() : void
     {
         parent::setUp();
-
         Artisan::call('passport:install');
-    }
 
-    /** @test */
+        if(count(User::all()) == 0)
+        {
+            Artisan::call('db:seed RoleandPermission');
+        }
+        
+        
+      
+    }
+    
+
+   /** @test */
     public function a_user_can_register()
     {
         $this->withoutExceptionHandling();
