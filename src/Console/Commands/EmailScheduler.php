@@ -4,7 +4,7 @@ namespace Fligno\Auth\Console\Commands;
 
 use Fligno\Auth\Models\Newsletter;
 use Illuminate\Console\Command;
-use Fligno\Auth\Mail\WebsiteLaunched;
+use Fligno\Auth\WebsiteLaunched;
 use Illuminate\Support\Facades\Mail;
 use Fligno\Auth\Models\Setting;
 use Illuminate\Support\Carbon;

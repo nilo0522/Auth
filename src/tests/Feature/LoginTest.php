@@ -19,8 +19,9 @@ class LoginTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_login()
+    public function admin_can_login()
     {
+
         $this->withoutExceptionHandling();
 
         $password = 'secret123';
@@ -28,10 +29,11 @@ class LoginTest extends TestCase
             [ 'email' => 'test@fligno.com',
         'password' => bcrypt($password),]);
 
-        $this->postJson('api/login', ['email' => 'test@fligno.com', 'password' => $password])
-             ->assertSuccessful()
-             ->assertJsonStructure(['access_token', 'token_type', 'expires_at']);
+        $this->postJson('/api/login', ['email' => 'admin@fligno.com', 'password' => "Default123"])
+            ->assertSuccessful()
+            ->assertJsonStructure(['access_token', 'token_type', 'expires_at']);
 
-        $this->assertAuthenticatedAs($user, 'web');
     }
+
+
 }

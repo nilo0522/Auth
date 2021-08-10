@@ -8,32 +8,7 @@ import 'react-select/dist/css/react-select.css';
 
 window.axios = require('axios');
 
-let token = Cookie.get('oToken');
-
-if (token) {
-  axios.interceptors.request.use((config) => {
-    config.headers.common['Authorization']  = `Bearer ${token}`;
-    return config;
-  }, (error) => {
-    return Promise.reject(error);
-  });
-
-  axios.interceptors.response.use(function (response) {
-    return response;
-  }, function (error) {
-    if (401 === error.response.status) {
-      window.location.href="/login"
-    } else {
-      return Promise.reject(error);
-    }
-  });
-}
-
-const logout = async () => {
-  Cookie.set('oToken', '')
-  await axios.post('/api/logout')
-  window.location = '/login'
-}
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -49,18 +24,5 @@ const logout = async () => {
 //     broadcaster: 'pusher',
 //     key: process.env.MIX_PUSHER_APP_KEY,
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-//     encrypted: true
+//     forceTLS: true
 // });
-import Echo from "laravel-echo"
-
-window.Pusher = require('pusher-js');
-
-window.Echo = new Echo({
-    broadcaster: 'pusher',
-    key: 'pusherKey',
-    wsHost: window.location.hostname,
-    wsPort: 6001,
-    forceTLS: false,
-    disableStats: true,
-});
-
