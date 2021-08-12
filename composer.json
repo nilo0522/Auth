@@ -1,0 +1,43 @@
+{
+    "name": "fligno/user-management",
+    "type": "package",
+    "description": "Fligno user management",
+    "keywords": ["framework", "laravel"],
+    "authors": [
+        {
+          "name": "Nilo Flora Jr",
+          "email": "bagaresnilo93@gmail.com"
+        }
+      ],
+    "license": "MIT",
+    "require": {
+        "php": "^7.3|^8.0",
+        "beyondcode/laravel-websockets": "^1.12",
+        "laravel/passport": "^10.1",
+        "laravel/tinker": "^2.5",  
+        "pusher/pusher-php-server": "~3.0",
+        "spatie/laravel-permission": "^3.6.0",
+        "spatie/laravel-short-schedule": "^1.4",
+        "spatie/laravel-tail": "^4.3",
+        "wikimedia/composer-merge-plugin": "dev-master",
+        "torann/geoip": "^1.0"
+    },
+    
+    "autoload": {
+        "psr-4": {
+    
+            "Fligno\\Auth\\": "src/"
+        }
+    },
+ 
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Fligno\\Auth\\AuthServiceProvider"
+              ]
+        }
+    },
+   
+    "minimum-stability": "dev",
+    "prefer-stable": true
+  }
