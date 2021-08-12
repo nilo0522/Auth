@@ -144,6 +144,9 @@ class User extends Authenticatable implements MustVerifyEmail
     use Notifiable;
     use EmailNotifications;
     use HasFactory;
+
+protected $guard_name = 'api';
+
 ```
 
 #### 8. Add `Passport::routes()` to your `AuthServiceProvider@boot`
