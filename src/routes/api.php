@@ -61,7 +61,7 @@ Route::group(['middleware' => ['auth:api', 'role:Admin']], function () {
     Route::get('timezone-now','TimeZoneController@getTimeZone');
     Route::post('timezone','TimeZoneController@store');
 
-    broadcast(new EventUserExpireToken('token-update'));
+   // broadcast(new EventUserExpireToken('token-update'));
 });
 
 Route::post('newsletters', 'NewsletterController@store');
