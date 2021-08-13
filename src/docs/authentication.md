@@ -18,7 +18,7 @@ GET  /api/me
 #### 1. Install via composer
 
 ```
-compose install
+composer install
 ```
 
 #### 2. Publish resource file
@@ -139,11 +139,14 @@ use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasRoles
+    use HasRoles;
     use HasApiTokens;
     use Notifiable;
     use EmailNotifications;
     use HasFactory;
+
+protected $guard_name = 'api';
+
 ```
 
 #### 8. Add `Passport::routes()` to your `AuthServiceProvider@boot`
