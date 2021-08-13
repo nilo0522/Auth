@@ -150,6 +150,7 @@ protected $guard_name = 'api';
 ```
 
 #### 8. Add `Passport::routes()` to your `AuthServiceProvider@boot`
+use Laravel\Passport\Passport;
 
 ```php
 /**
