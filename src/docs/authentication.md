@@ -191,7 +191,7 @@ Route::view('/', 'Auth::welcome');
 This is an optional step. This is only to demonstrate a homepage with the authentication links.
 
 #### 11. run php artisan db:seed RoleandPermission
-### 12. Issues
+
 ## Issues
 
 If you receive a message like `This cache store does not support tagging` this is because the `torann/geoip` package requires a caching driver which supports tagging and you probably have your application set to use the `file` cache driver. You can [publish the config file](#custom-configuration) for the `torann/geoip` package and set `'cache_tags' => null,` to solve this. [Read more about this issue here](https://github.com/jamesmills/laravel-timezone/issues/4#issuecomment-494648925).
