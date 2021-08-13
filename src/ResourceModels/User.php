@@ -1,6 +1,6 @@
 <?php
 
-namespace Fligno\Auth\ResourceModels;
+namespace App\ResourceModels;
 
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
