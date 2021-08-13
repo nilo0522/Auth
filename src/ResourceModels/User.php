@@ -7,7 +7,7 @@ use Spatie\Permission\Models\Role;
 
 class User
 {
-    public static $model = 'App\User';
+    public static $model = 'App\Models\User';
 
     public static $searchColumns = ['name', 'email'];
 

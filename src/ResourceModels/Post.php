@@ -7,7 +7,7 @@ use Spatie\Permission\Models\Role;
 
 class Post
 {
-    public static $model = '\App\Post';
+    public static $model = '\Fligno\Auth\Post';
 
     public static $searchColumns = ['title', 'content'];
 
