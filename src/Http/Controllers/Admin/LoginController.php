@@ -21,7 +21,7 @@ class LoginController extends Controller
      */
     protected function sendLoginResponse(Request $request)
     {
-        $user = auth()->guard('web')->user();
+        $user = auth()->user();
 
         if (!$user->hasRole($this->role())) {
             return $this->sendFailedLoginResponse();
@@ -29,7 +29,7 @@ class LoginController extends Controller
 
         $tokenResult = $user->createToken('Personal Access Token');
         $token = $tokenResult->token;
-        $scrpt = "<script> localStorage.setItem('bobo','dasd')</script>" ;
+       
         if ($request->remember_me) {
             $token->expires_at = Carbon::now()->addWeeks(1);
         }
