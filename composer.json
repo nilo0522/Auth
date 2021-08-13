@@ -19,7 +19,8 @@
         "spatie/laravel-short-schedule": "^1.4",
         "spatie/laravel-tail": "^4.3",
         "wikimedia/composer-merge-plugin": "dev-master",
-        "torann/geoip": "^1.0"
+        "torann/geoip": "^1.0",
+        "laravel/ui": "^3.3"
     },
     
     "autoload": {

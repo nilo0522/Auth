@@ -10,9 +10,7 @@ use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
-<<<<<<< HEAD
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-=======
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;//, Paginators;
->>>>>>> 3693e41953f1b76acca9556d8a85df8f609733ef
+
+   
 }
