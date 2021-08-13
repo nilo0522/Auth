@@ -18,7 +18,7 @@ GET  /api/me
 #### 1. Install via composer
 
 ```
-composer install
+ composer require fligno/user-management
 ```
 
 #### 2. Publish resource file
