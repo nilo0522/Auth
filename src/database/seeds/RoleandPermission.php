@@ -7,7 +7,7 @@ use App\Models\User;
 use Fligno\Auth\Models\Newsletter;
 use Fligno\Auth\Models\EmailContent;
 use Fligno\Auth\Models\Post;
-class RoleandPermisssion extends Seeder
+class RoleandPermission extends Seeder
 {
     /**
      * Run the database seeds.
