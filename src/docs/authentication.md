@@ -194,4 +194,10 @@ This is an optional step. This is only to demonstrate a homepage with the authen
 
 ## Issues
 
-If you receive a message like `This cache store does not support tagging` this is because the `torann/geoip` package requires a caching driver which supports tagging and you probably have your application set to use the `file` cache driver. You can [publish the config file](#custom-configuration) for the `torann/geoip` package and set `'cache_tags' => null,` to solve this. [Read more about this issue here](https://github.com/jamesmills/laravel-timezone/issues/4#issuecomment-494648925).
+1.If you receive a message like `This cache store does not support tagging` this is because the `torann/geoip` package requires a caching driver which supports tagging and you probably have your application set to use the `file` cache driver. You can [publish the config file](#custom-configuration) for the `torann/geoip` package and set `'cache_tags' => null,` to solve this. [Read more about this issue here](https://github.com/jamesmills/laravel-timezone/issues/4#issuecomment-494648925).
+
+2.   Session store not set on request.
+    -add `\Illuminate\Session\Middleware\StartSession::class` in http kernel.php `middlewaregroups api`
+
+3.  Target class [role] does not exist.
+   - add `'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class` in config `app.php`
