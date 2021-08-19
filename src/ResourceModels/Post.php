@@ -1,14 +1,13 @@
 <?php
 
-namespace Fligno\Auth\ResourceModels;
+namespace App\ResourceModels;
 
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
 class Post
 {
-    public static $model = '\App\Post';
-
+    public static $model = '\Fligno\Auth\Models\Post';
     public static $searchColumns = ['title', 'content'];
 
     public static $headers = [];

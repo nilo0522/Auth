@@ -75,43 +75,7 @@ const Sidebar = () => {
           ))}
      
    </SubMenu>
-    {//Payment Management ->leave this comment
-<SubMenu icon={<FaMoneyCheck/>} title="Payment Management" >
-        <MenuItem>
-         <NavLink   
-              to="/paypal"
-              activeClassName="font-bold text-white"
-              className="flex items-center ml-3 py-1"
-              > <span className="mr-2"><FaPaypal/></span> Paypal
-             </NavLink>
-         </MenuItem>
-         <MenuItem>
-       
-         <NavLink
-              to="/test-paypal"
-              activeClassName="font-bold text-white"
-              className="flex items-center ml-3 py-1">
-                 <span className="mr-2"><FaCheckCircle/></span>Test Paypal
-             </NavLink>
-      </MenuItem>
-      <MenuItem>
-           <NavLink
-              to="/stripe"
-              activeClassName="font-bold text-white"
-              className="flex items-center ml-3 py-1">
-                 <span className="mr-2"><FaCcStripe/></span>Stripe
-             </NavLink>
-        </MenuItem>
-        <MenuItem>
-       
-         <NavLink
-              to="/test-stripe"
-              activeClassName="font-bold text-white"
-              className="flex items-center ml-3 py-1">
-                 <span className="mr-2"><FaCheckCircle/></span>Test Stripe
-             </NavLink>
-      </MenuItem>
-      </SubMenu>
+    {//Payment Management ->leave this commentW
     }
 
     
@@ -151,15 +115,7 @@ const Sidebar = () => {
             </NavLink>
         </MenuItem>
         {
-          //Gateway ->leave this comment
-<MenuItem>
-        <NavLink
-         to="/gateway"
-         activeClassName="font-bold text-white"
-         className="flex items-center ml-3 py-1">
-            <span className="mr-2"><FaMoneyCheckAlt/></span>Gateway
-        </NavLink>
-      </MenuItem>
+          //Gateway ->leave this commen
         }
    </SubMenu>
   </Menu>

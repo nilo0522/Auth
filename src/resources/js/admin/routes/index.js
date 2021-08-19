@@ -20,16 +20,6 @@ const CreateOrganization = lazy(() => import("~/pages/organization/create"));
 const EditOrganization = lazy(()=> import("~/pages/organization/edit"));
 const TimeZone = lazy(()=>import("~/pages/usertimezone"));
 //PaymentGateway ->leave this comment 
-const Gateway = lazy(()=>import("~/pages/gateway"));
-const Stripes = lazy(()=>import("~/pages/stripe"));
-const EditStripes = lazy(()=>import("~/pages/stripe/edit"));
-const CreateStripes = lazy(()=>import("~/pages/stripe/create"));
-const Test = lazy(()=>import("~/pages/stripe/test"));
-const Paypals = lazy(()=> import ("~/pages/paypal"));
-const CreatePaypal = lazy(()=>import("~/pages/paypal/create"));
-const EditPaypal = lazy(()=>import("~/pages/paypal/edit"));
-const TestPaypal = lazy(()=>import("~/pages/paypal/test"));
-
 
 const routes = [
   {
@@ -124,69 +114,6 @@ const routes = [
   },
   
   //PaymenGatewayRoute ->leave this comment
-{
-            path:"/gateway",
-            exact:true,
-            component: () => <Gateway/>
-        
-          },
-
-        
-          {
-            path:"/stripe",
-            exact:true,
-            component: () => <Stripes/>
-        
-          },
-
-          {
-            path:"/stripe/create",
-            exact:true,
-            component: () => <CreateStripes/>
-        
-          },
-
-          {
-            path:"/stripe/edit/:id",
-            exact:true,
-            component: () => <EditStripes/>
-        
-          },
-
-          {
-            path:"/test-stripe",
-            exact:true,
-            component: () => <Test/>
-        
-          },
-
-          {
-            path:"/paypal",
-            exact:true,
-            component: () => <Paypals/>
-        
-          },
-
-          {
-            path:"/paypal/create",
-            exact:true,
-            component: () => <CreatePaypal/>
-        
-          },
-
-          {
-            path:"/paypal/edit/:id",
-            exact:true,
-            component: () => <EditPaypal/>
-        
-          },
-
-          {
-            path:"/test-paypal",
-            exact:true,
-            component: () => <TestPaypal/>
-        
-          },
-
+  
 ];
 export default routes;
