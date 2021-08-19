@@ -18,7 +18,7 @@ public function setUp() : void
     Artisan::call('passport:install');
     if(count(User::all()) == 0)
     {
-        Artisan::call('db:seed RoleandPermission');
+        Artisan::call('db:seed FlignoAuthSeeder');
     }
 }
          /** @test */

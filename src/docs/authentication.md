@@ -190,7 +190,7 @@ Route::view('/', 'Auth::welcome');
 
 This is an optional step. This is only to demonstrate a homepage with the authentication links.
 
-#### 11. run php artisan db:seed RoleandPermission
+#### 11. run php artisan db:seed FlignoAuthSeeder
 
 ## Issues
 
