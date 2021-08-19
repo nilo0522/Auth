@@ -26,7 +26,7 @@ const TimeZone = () =>
    {
        if(e)
        {
-         
+      
          setTimeZone(e.value)
         const formdata =  new FormData()
         formdata.append('timezone',e.value)
@@ -44,15 +44,12 @@ const TimeZone = () =>
 
     
    }
- useEffect(() => {
-  console.log("time->",timezone_date)
- }, [timezone_date])
+
   
    if(load)
    {
     return (<div style={{ width: '500px' }}>
-    
-   <Card  className="mb-2 font-bold">
+     <Card  className="mb-2 font-bold">
       <CardContent >
          <h1>{timezone_date}</h1>
       </CardContent>
@@ -68,7 +65,7 @@ const TimeZone = () =>
           onChange ={handleSelect}
           options={data.option}
         />
-         
+        
   </div>)
    }else{
     return (<div style={{ width: '500px' }}>

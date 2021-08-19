@@ -1,13 +1,13 @@
 <?php
 
-namespace App\ResourceModels;
+namespace Fligno\Auth\ResourceModels;
 
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
 class User
 {
-    public static $model = 'App\Models\User';
+    public static $model = 'App\User';
 
     public static $searchColumns = ['name', 'email'];
 
@@ -64,7 +64,6 @@ class User
             ],
         ];
     }
-
     public function validation()
     {
         return  [

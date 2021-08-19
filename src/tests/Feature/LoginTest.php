@@ -2,14 +2,14 @@
 
 namespace Tests\Feature;
 
-use App\Models\User;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 
 class LoginTest extends TestCase
 {
-   use RefreshDatabase;
+    use RefreshDatabase;
 
     public function setUp() : void
     {
@@ -24,9 +24,10 @@ class LoginTest extends TestCase
         $this->withoutExceptionHandling();
 
         $password = 'secret123';
-        $user = User::factory()->create(
-            [ 'email' => 'test@fligno.com',
-        'password' => bcrypt($password),]);
+        $user = factory(User::class)->create([
+            'email' => 'test@fligno.com',
+            'password' => bcrypt($password),
+        ]);
 
         $this->postJson('api/login', ['email' => 'test@fligno.com', 'password' => $password])
              ->assertSuccessful()

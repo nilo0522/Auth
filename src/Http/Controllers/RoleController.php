@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Fligno\Auth\Traits\Paginators;
 use Fligno\Auth\Resource\PaginationCollection;
-use App\Models\Setting;
 use Laravel\Passport\Passport;
 use Illuminate\Support\Carbon;
 class RoleController extends Controller
@@ -34,11 +33,7 @@ class RoleController extends Controller
         $data = $this->paginate($roles, $columns);
      
         return new PaginationCollection($data);
-        //return auth()->guard('api')->user();
-        //$dt = Carbon::now();
-        //$dt = Carbon::createFromFormat('Y-m-d H:i:s', now());
-        //return now();
-        //return $dt;
+       
     }
 
     /**
@@ -65,9 +60,9 @@ class RoleController extends Controller
      * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function show(Role $role)
+    public function show($id)
     {
-     
+        $role = Role::find($id);
         return response($role, 200);
     }
 
@@ -78,14 +73,14 @@ class RoleController extends Controller
      * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(Request $request,$id)
     {
          
         request()->validate([
             'name' => 'required',
         ]);
 
-        $role = tap($role)->update(request()->all());
+        $role = Role::where('id',$id)->update(['name'=>$request->name]);
 
         return response()->json($role);
     }

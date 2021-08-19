@@ -12,6 +12,7 @@ use Illuminate\Queue\SerializesModels;
 use Fligno\Auth\Models\OauthToken;
 use Fligno\Auth\Models\Setting;
 use Laravel\Passport\Passport;
+use Illuminate\Support\Facades\Schema;
 class EventUserExpireToken implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
@@ -34,6 +35,9 @@ class EventUserExpireToken implements ShouldBroadcast
      */
     public function broadcastOn()
     {
+      if (Schema::hasTable('settings')) {
+        // Code to create table
+    
       $setting = Setting::where('setting','Session')->get();
       if(count($setting)>0)
       {
@@ -79,5 +83,6 @@ class EventUserExpireToken implements ShouldBroadcast
          }
         }
       //return new Channel('token_update');
+      }
     }
 }

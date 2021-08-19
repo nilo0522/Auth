@@ -14,7 +14,7 @@
         <script src="https://kit.fontawesome.com/964ddd7bbe.js" crossorigin="anonymous"></script>
 
         <!-- Styles -->
-        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
  
         <!-- Scripts -->
         
@@ -85,6 +85,9 @@
             input:checked ~ .toggle__dot {
               transform: translateX(100%);
               background-color: #4299F5;
+            }
+            .pro-sidebar .pro-menu .pro-menu-item.pro-sub-menu .pro-inner-list-item .pro-inner-item:before {
+            content: none !important;
             }
         </style>
     </head>

@@ -56,9 +56,9 @@ class PermissionController extends Controller
      * @param  \App\Permission  $permission
      * @return \Illuminate\Http\Response
      */
-    public function show(Permission $permission)
+    public function show($id)
     {
-        
+            $permission = Permission::find($id);
         return response($permission, 200);
     }
 
@@ -69,14 +69,14 @@ class PermissionController extends Controller
      * @param  \App\Permission  $permission
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Permission $permission)
+    public function update(Request $request,$id)
     {
         
         request()->validate([
             'name' => 'required',
         ]);
 
-        $permission = tap($permission)->update(request()->all());
+        $permission = Permission::where('id',$id)->update(['name'=>$request->name]);
 
         return response()->json($permission);
     }

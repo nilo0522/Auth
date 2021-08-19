@@ -49,9 +49,9 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($id)
     {
-        $user->role = $user->getRoleNames()[0] ?? '';
+        $user = User::find($id);
         return response($user, 200);
     }
 

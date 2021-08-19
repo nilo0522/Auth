@@ -40,7 +40,6 @@ class AuthServiceProvider extends ServiceProvider
             __DIR__ . '/resources/img' => public_path('/admin'),
             __DIR__ . '/resources/img' => public_path('/img'),
             __DIR__ . '/database/seeds' => base_path('database/seeders'),
-            __DIR__ . '/database/migrations' => base_path('database/migrations'),
             __DIR__ . '/ResourceModels' => app_path('ResourceModels'),
            // __DIR__ . '/resources/views' => resource_path('/views'),
             //__DIR__ . '/Models' => app_path('/Models')

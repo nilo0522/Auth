@@ -14,5 +14,15 @@ export default
     axios.post(`${BASE_API_URL}/timezone`,data,{
         Accept: 'application/json',
         'Content-Type': 'multipart/form-data',
+    }),
+    Payment : (token,data) => 
+    axios.post(`${BASE_API_URL}/payment`,token,data,{
+        Accept: 'application/json',
+        'Content-Type': 'multipart/form-data',
+    }),
+    Gateway : (data) => 
+    axios.post(`${BASE_API_URL}/gateway`,data,{
+        Accept: 'application/json',
+        'Content-Type': 'multipart/form-data',
     })
 }

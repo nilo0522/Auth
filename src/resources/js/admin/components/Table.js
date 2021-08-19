@@ -55,7 +55,7 @@ const Table = ({
   return (
     <>
       <section className={`overflow-auto`}>
-        <table className={`table-fixed text-left w-full ${className}`}>
+        <table className={`table-auto text-left w-full ${className} `}>
           {header}
           {content}
         </table>
