@@ -65,36 +65,35 @@ mix.webpackConfig({
 #### 4. Add `package.json` dependecies
 
 ```json
-"devDependencies": {
-        "@babel/preset-react": "^7.0.0",
-        "axios": "^0.21",
-        "js-cookie": "^2.2.1",
-        "laravel-mix": "^6.0.27",
-        "lodash.debounce": "^4.0.8",
-        "postcss": "^8.3.1",
-        "pretty-checkbox-react": "^1.1.0",
-        "react": "^16.2.0",
-        "react-dom": "^16.2.0",
-        "react-router-dom": "^5.1.2",
-        "resolve-url-loader": "^4.0.0",
-        "sass": "^1.35.2",
-        "sass-loader": "^12.1.0",
-        "webpack": "^5.48.0"
+ "require": {
+        "php": "^7.3|^8.0",
+        "beyondcode/laravel-websockets": "^1.12",
+        "fideloper/proxy": "^4.4",
+        "fruitcake/laravel-cors": "^2.0",
+        "guzzlehttp/guzzle": "^7.0.1",
+        "illuminate/cache": "^8.0",
+        "illuminate/console": "^8.0",
+        "illuminate/support": "^8.0",
+        "laravel/framework": "^8.40",
+        "laravel/legacy-factories": "^1.1",
+        "laravel/passport": "^10.1",
+        "laravel/tinker": "^2.5",
+        "laravel/ui": "^3.3",
+        "pusher/pusher-php-server": "~3.0",
+        "spatie/laravel-permission": "^3.6.0",
+        "spatie/laravel-short-schedule": "^1.4",
+        "spatie/laravel-tail": "^4.3",
+        "stripe/stripe-php": "^7.93",
+        "wikimedia/composer-merge-plugin": "dev-master"
     },
-    "dependencies": {
-        "@material-ui/core": "^4.12.3",
-        "express": "^4.17.1",
-        "laravel-echo": "^1.11.0",
-        "pusher-js": "^7.0.3",
-        "react-select": "^4.3.1",
-        "react-select-2": "^2.0.11",
-        "react-swal": "^3.0.0",
-        "react-time-picker": "^4.3.0",
-        "react-transition-group": "^2.3.0-beta.0",
-        "select2-react-component": "^5.10.4",
-        "socket.io": "^4.1.3",
-        "sweetalert2": "^11.1.0",
-        "webpack-cli": "^4.7.2"
+    "require-dev": {
+        "facade/ignition": "^2.5",
+        "fakerphp/faker": "^1.9.1",
+        "laravel/sail": "^1.0.1",
+        "mockery/mockery": "^1.4.2",
+        "nunomaduro/collision": "^5.0",
+        "phpunit/phpunit": "^9.3.3",
+        "torann/geoip": "^1.0"
     }
 ```
 
