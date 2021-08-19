@@ -60,7 +60,7 @@ class EmailScheduler extends Command
             
            }
         }
-        info('asdasd');
+        
        
     }
    
